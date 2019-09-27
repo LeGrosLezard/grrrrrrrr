@@ -1,12 +1,7 @@
 # grrrrrrrr
 
-bon ben sklearn marche 
 
-soit ca sert a rien et directe faire la prediction
-
-soit faire les contours et detection en meme temps
-
-pause manger
+faut récup le chiffre, les découper et le mettre dans le modele
 
 
 
