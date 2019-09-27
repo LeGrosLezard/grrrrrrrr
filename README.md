@@ -1,10 +1,10 @@
 # grrrrrrrr
 
-soit faut isoler les couleurs pour supprimer les lignes mais ca marche pas
-soit prendre les extrémité et effacer mais ca marche pas
-soit découpé chaque partie et récupérer les chiffres mais jy arrive pas
+faut: longueur/largeur pixel si que un efface
 
-et ensuite une fois les chiffres isolés faire un matching mais ca marche pas
+tfacon il fallait que je commence l'ia en faisant les fonctions sans tf
+
+
 
 faire les fonctions pour la detection de chiffre comme dans la video mais...
 
