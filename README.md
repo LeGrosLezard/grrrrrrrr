@@ -2,12 +2,9 @@
 
 c'est ok pour la premiere,
 
- - mais la troisieme et quatrieme y'a un trait en plein milieu du nombre, 
-
 la 2eme INV (donc récupérer la couleur dominante) 
 
  - résoudre ca serait de faire * + - / mais un capchat ca chagne a chaque essais du coup mettre que + ben ca marchera un jour mais...
-
 
 position : récupérer x et y
 
