@@ -2,6 +2,11 @@
 
 model de codeheroku 
 
+![treatment](https://user-images.githubusercontent.com/53193299/65807729-36a78800-e190-11e9-8752-a50647de8c3c.png)
+
+ma premiere prediction hihihi
+
+
 c'est ok pour la premiere,
 
 la 2eme INV (donc récupérer la couleur dominante) 
