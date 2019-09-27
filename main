@@ -20,7 +20,7 @@ class Picture:
     def open_img(image):
 
         img = cv2.imread(image)
-
+        img = adjust_gamma(img, 0.5)
 
 
         blank_image = np.zeros((img.shape[0],img.shape[1],3), np.uint8)
@@ -48,8 +48,8 @@ class Picture:
 
     @staticmethod
     def show_img(img):
-        #cv2.imshow("image", img)
-        pass
+        cv2.imshow("image", img)
+
 
 
 
