@@ -1,6 +1,6 @@
 # grrrrrrrr
 
-model de codeheroku 
+oublie pas de cpder comme ca mtn => count+=1 if... else... 
 
 ![treatment](https://user-images.githubusercontent.com/53193299/65807729-36a78800-e190-11e9-8752-a50647de8c3c.png)
 
