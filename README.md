@@ -4,7 +4,7 @@ model de codeheroku
 
 ![treatment](https://user-images.githubusercontent.com/53193299/65807729-36a78800-e190-11e9-8752-a50647de8c3c.png)
 
-ma premiere prediction hihihi
+ma premiere prediction hihihi du model de codeheroku 
 
 
 c'est ok pour la premiere,
