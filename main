@@ -1,0 +1,113 @@
+import cv2
+import operator
+import numpy as np
+from PIL import Image
+import matplotlib.pyplot as plt
+from collections import defaultdict
+
+
+def adjust_gamma(image, gamma):
+
+    invGamma = 1.0 / gamma
+    table = np.array([((i / 255.0) ** invGamma) * 255
+            for i in np.arange(0, 256)]).astype("uint8")
+    return cv2.LUT(image, table)
+
+
+class Picture:
+
+    @staticmethod
+    def open_img(image):
+        img = cv2.imread(image)
+        img = adjust_gamma(img, 0.5)
+
+        return img
+
+    @staticmethod
+    def collect_color(img):
+
+        color_dictionnary = {}
+        img_pil = Image.fromarray(img)
+
+        for value in img_pil.getdata():
+            if value in color_dictionnary.keys():
+                color_dictionnary[value] += 1
+            else:
+                color_dictionnary[value] = 1
+
+        return color_dictionnary, img_pil
+
+
+
+    @staticmethod
+    def mask(color_dictionnary, img):
+
+        gray=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        ret,thresh2 = cv2.threshold(gray,127,255,cv2.THRESH_BINARY_INV)
+        cv2.imshow("thresh2", thresh2)
+        cv2.waitKey(0)
+
+
+
+
+        cv2.imshow("img", img)
+        cv2.waitKey(0)
+
+
+
+
+
+    @staticmethod
+    def show_img(img):
+        cv2.imshow("image", img)
+
+
+
+
+
+if __name__ == "__main__":
+
+    path = "picture/{}"
+    image_package = ["a.png", "b.png", "c.png", "d.png"]
+
+    #for i in image_package:
+    
+    resolv_cap = Picture()
+
+    img = resolv_cap.open_img(path.format("a.png"))
+
+
+    color_dictionnary, img_pil = resolv_cap.collect_color(img)
+    resolv_cap.mask(color_dictionnary, img)
+
+
+
+
+    
+    #resolv_cap.show_img(image_crop)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
