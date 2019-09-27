@@ -1,21 +1,30 @@
-import cv2
-from PIL import Image
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
+import joblib,cv2
+import numpy as np
+
+model = joblib.load("svm_6label_linear_1_0")
 
 
-from sklearn import datasets
-from sklearn import svm
 
-digits = datasets.load_digits()
-clf = svm.SVC(gamma=0.0001, C=100)
-print(len(digits.data))
+img = cv2.imread("treatment.png", 0)
+_, thresh = cv2.threshold(img, 80, 255, 0)
+thresh = cv2.resize(thresh, (28, 28), interpolation=cv2.INTER_AREA)
+cv2.imshow("daz", thresh)
+rows,cols = thresh.shape
+
+X=[]
+for i in range(rows):
+    for j in range(cols):
+        k = thresh[i,j]
+        if k>100:
+            k=1
+        else: 
+            k=0	
+        X.append(k)
 
 
-x, y = digits.data[:-1], digits.target[:-1]
-clf.fit(x,y)
+predictions = model.predict([X])   
+print(predictions[0])
 
 
-plt.imshow(digits.images[-2], cmap="gray")
-plt.show()
-print("pred", clf.predict(digits.data[-2].reshape(1, -1)))
+
+
