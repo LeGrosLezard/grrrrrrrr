@@ -1,5 +1,7 @@
 # grrrrrrrr
 
+jlui ai dis que jferai ses projets gratos il a aimé toutes mes photo facebook ce glan ^^
+
 c'est ok pour la premiere,
 
 la 2eme INV (donc récupérer la couleur dominante) 
