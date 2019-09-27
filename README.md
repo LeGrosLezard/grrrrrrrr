@@ -2,9 +2,7 @@
 
 c'est ok pour la premiere,
 
-ok pour la troisieme 
-
- - mais la quatrieme y'a un trait en plein milieu du nombre, 
+ - mais la troisieme et quatrieme y'a un trait en plein milieu du nombre, 
 
 la 2eme INV (donc récupérer la couleur dominante) 
 
