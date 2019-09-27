@@ -1,8 +1,12 @@
 # grrrrrrrr
 
-faut: longueur/largeur pixel si que un efface
+bon ben sklearn marche 
 
-tfacon il fallait que je commence l'ia en faisant les fonctions sans tf
+soit ca sert a rien et directe faire la prediction
+
+soit faire les contours et detection en meme temps
+
+pause manger
 
 
 
