@@ -66,7 +66,7 @@ class Picture:
         
         img = cv2.imread("treatment.png", 0);img = cv2.resize(img, (1400, 1000))
 
-        _, thresh = cv2.threshold(img, 100, 255, 0)#120/30
+        _, thresh = cv2.threshold(img, 100, 255, 0)#100
 
         contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
                                         cv2.CHAIN_APPROX_SIMPLE)
@@ -74,17 +74,17 @@ class Picture:
         print(len(contours))
         if len(contours) > 60:
             for i in contours:
-                if cv2.contourArea(i) < 400:
-                    cv2.drawContours(img, [i], -1, (255,255,255), 3)
+                if cv2.contourArea(i) < 300:
+                    cv2.drawContours(img, [i], 0, (255,255,255), 3)
                 
-        cv2.imwrite("treatment.png", img)
-        cv2.imshow("dzadzadaz1564984", img)
-        cv2.waitKey(0)
+            cv2.imwrite("treatment.png", img)
+            cv2.imshow("dzadzadaz1564984", img)
+            cv2.waitKey(0)
 
 
 
         img = cv2.imread("treatment.png", 0)
-        _, thresh = cv2.threshold(img, 40, 255, 0)#120/30
+        _, thresh = cv2.threshold(img, 150, 255, 0)#40
         contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
                                        cv2.CHAIN_APPROX_SIMPLE)
 
@@ -125,36 +125,9 @@ class Picture:
 if __name__ == "__main__":
 
     path = "picture/{}"
-    #image_package = ["picture/a.png", "picture/c.png", "picture/d.png"]
+    image_package = ["c.png", "a.png", "c.png", "d.png"]
 
 
-
-##    image_package = ["picture/d.png"]
-##    
-##    for i in image_package:
-##        
-##        img = cv2.imread(i, 0)
-##        _, thresh = cv2.threshold(img, 100, 255, 1)
-##
-##        contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
-##                                       cv2.CHAIN_APPROX_SIMPLE)
-##
-##        for i in contours:
-##            if cv2.contourArea(i) < 4:
-##                cv2.drawContours(thresh, [i], -1, (0,0,0), 2)
-##
-##        _, thresh = cv2.threshold(thresh, 200, 255, 0)
-##
-##        cv2.imshow("crop", thresh)
-##        cv2.waitKey(0)
-
-
-
-
-
-    image_package = ["d.png"]
-    #for i in image_package:
-    
     resolv_cap = Picture()
  
     for i in image_package:
