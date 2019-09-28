@@ -1,29 +1,60 @@
-import joblib,cv2
+from sklearn import datasets
+from sklearn import svm
+import matplotlib.pyplot as plt
+import cv2
 import numpy as np
 
-model = joblib.load("svm_6label_linear_1_0")
+
+digits = datasets.load_digits()
+clf = svm.SVC(gamma=0.0001, C=100)
+
+
+x,y = digits.data[:-10], digits.target[:-10]
+clf.fit(x,y)
+
 
 
 
 img = cv2.imread("treatment.png", 0)
-_, thresh = cv2.threshold(img, 80, 255, 0)
-thresh = cv2.resize(thresh, (28, 28), interpolation=cv2.INTER_AREA)
-cv2.imshow("daz", thresh)
-rows,cols = thresh.shape
+_, thresh = cv2.threshold(img, 20, 255, 0)
+cv2.imwrite("test.png", thresh)
+cv2.imshow("crop", thresh)
+cv2.waitKey(0)
 
-X=[]
-for i in range(rows):
-    for j in range(cols):
-        k = thresh[i,j]
-        if k>100:
-            k=1
-        else: 
-            k=0	
-        X.append(k)
+img1 = cv2.imread("test.png", 0);img1 = cv2.resize(img1, (8, 8))
+img = img1.astype(digits.data.dtype)
+print(type(img))
+print(img)
+
+img16 = []
+liste_w = []
+for i in img:
+    for j in i:
+        j = int(j/16); j = float(j)
+        img16.append(j)
+
+        
+img16 = np.array(img16, dtype=np.float32)
+img16 = img16.reshape(1, -1)
+print(img16)
+
+print("")
 
 
-predictions = model.predict([X])   
-print(predictions[0])
+
+
+
+print(digits.data[-4])
+print(digits.data[-4].shape)
+
+##print('Prediction:',clf.predict(digits.data)[-4])
+##plt.imshow(digits.images[-4], cmap="gray")
+##plt.show()
+
+print('Prediction:',clf.predict(img16))
+plt.imshow(img1, cmap="gray")
+plt.show()
+
 
 
 
