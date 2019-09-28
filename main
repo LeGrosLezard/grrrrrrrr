@@ -74,12 +74,12 @@ class Picture:
         print(len(contours))
         if len(contours) > 60:
             for i in contours:
-
-                cv2.drawContours(img, [i], -1, (255,255,255), 2)
-
-            cv2.imwrite("treatment.png", img)
-            cv2.imshow("dzadzadaz1564984", img)
-            cv2.waitKey(0)
+                if cv2.contourArea(i) < 400:
+                    cv2.drawContours(img, [i], -1, (255,255,255), 3)
+                
+        cv2.imwrite("treatment.png", img)
+        cv2.imshow("dzadzadaz1564984", img)
+        cv2.waitKey(0)
 
 
 
@@ -152,7 +152,7 @@ if __name__ == "__main__":
 
 
 
-    image_package = ["c.png"]
+    image_package = ["d.png"]
     #for i in image_package:
     
     resolv_cap = Picture()
