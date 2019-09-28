@@ -9,14 +9,14 @@ digits = datasets.load_digits()
 clf = svm.SVC(gamma=0.0001, C=100)
 
 
-x,y = digits.data[:-10], digits.target[:-10]
+x,y = digits.data[:-1], digits.target[:-1]
 clf.fit(x,y)
 
 
 
 
-img = cv2.imread("treatment.png", 0)
-_, thresh = cv2.threshold(img, 20, 255, 0)
+img = cv2.imread("treatment.png", 0);img = cv2.resize(img, (32, 32))
+_, thresh = cv2.threshold(img, 120, 255, 0)
 cv2.imwrite("test.png", thresh)
 cv2.imshow("crop", thresh)
 cv2.waitKey(0)
