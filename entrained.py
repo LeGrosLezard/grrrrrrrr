@@ -15,11 +15,18 @@ clf.fit(x,y)
 
 
 
-img = cv2.imread("treatment.png", 0);img = cv2.resize(img, (32, 64))
-_, thresh = cv2.threshold(img, 120, 255, 0)
+img = cv2.imread("treatment.png", 0);img = cv2.resize(img, (34, 64))
+_, thresh = cv2.threshold(img, 120, 255, 0)#120/30
 cv2.imwrite("test.png", thresh)
 cv2.imshow("crop", thresh)
 cv2.waitKey(0)
+
+
+
+
+
+
+
 
 img1 = cv2.imread("test.png", 0);img1 = cv2.resize(img1, (8, 8))
 img = img1.astype(digits.data.dtype)
