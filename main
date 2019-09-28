@@ -6,157 +6,129 @@ from matplotlib.pyplot import *
 from collections import defaultdict
 import math
 
-def adjust_gamma(image, gamma):
+from entrained import main
 
-    invGamma = 1.0 / gamma
-    table = np.array([((i / 255.0) ** invGamma) * 255
-            for i in np.arange(0, 256)]).astype("uint8")
-    return cv2.LUT(image, table)
+def create_blanck_image(img):
+    """Black picture of img size"""
 
-def make_line(thresh):
-    """We make line for detect more than one area
-    with border, on eyelashes is paste to the border"""
+    blank_image = np.zeros((img.shape[0],img.shape[1],3), np.uint8)
+    blank_image[0:img.shape[0], 0:img.shape[1]] = 0, 0, 0
 
-    cv2.line(thresh, (0, 0), (0, thresh.shape[0]), (0), 2)
-    cv2.line(thresh, (0, 0), (thresh.shape[1], 0), (0), 2)
+    return blank_image
 
-    cv2.line(thresh,
-             (thresh.shape[1], 0),
-             (thresh.shape[1], thresh.shape[0]), (0), 2)
+def clean_picture_little_noise(img):
 
-    cv2.line(thresh, (0,  thresh.shape[0]),
-             (thresh.shape[1], thresh.shape[0]), (0), 2)
+    gray=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    _, thresh = cv2.threshold(gray, 100, 255, 1)
 
+    contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
+                                   cv2.CHAIN_APPROX_SIMPLE)
 
+    for i in contours:
+        if cv2.contourArea(i) < 0.5:
+            cv2.drawContours(thresh, [i], -1, (0,0,0), 1)
 
-class Picture:
-
-    @staticmethod
-    def resizer_picture(crop):
-        image_pil = Image.fromarray(crop).convert("LA").resize((8, 8), Image.ANTIALIAS).save("treatment.png")
-        
-
-    @staticmethod
-    def open_img(image):
-
-        img = cv2.imread(image)
+    cv2.imwrite("treatment.png", thresh)
+    cv2.imshow("dzadza", thresh)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
 
-        blank_image = np.zeros((img.shape[0],img.shape[1],3), np.uint8)
-        blank_image[0:img.shape[0], 0:img.shape[1]] = 0, 0, 0
-        
-        gray=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        _, thresh = cv2.threshold(gray, 100, 255, 1)#30/100
-        #30 pour a
-        #100 pour c
-        contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
-                                       cv2.CHAIN_APPROX_SIMPLE)
+def fusion_contours():
 
+    img = cv2.imread("treatment.png", 0);img = cv2.resize(img, (1400, 1000))
+
+    _, thresh = cv2.threshold(img, 100, 255, 0)#100
+
+    contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
+                                    cv2.CHAIN_APPROX_SIMPLE)
+
+
+    if len(contours) > 60:
         for i in contours:
-            if cv2.contourArea(i) < 0.5:
-                cv2.drawContours(thresh, [i], -1, (0,0,0), 1)
-
-        cv2.imwrite("treatment.png", thresh)
-        cv2.imshow("dzadza", thresh)
+            if cv2.contourArea(i) < 300:
+                cv2.drawContours(img, [i], 0, (255,255,255), 3)
+            
+        cv2.imwrite("treatment.png", img)
+        cv2.imshow("dzadzadaz1564984", img)
         cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+
+def find_contour_to_numbers(blank_image, numbers_position, image_prediction):
+
+
+    img = cv2.imread("treatment.png", 0)
+    _, thresh = cv2.threshold(img, 150, 255, 0)#40
+    contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
+                                   cv2.CHAIN_APPROX_SIMPLE)
+
+    cv2.imshow("thresh123123", thresh)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+    for i in contours:
+        if cv2.contourArea(i):
+
+            x,y,w,h = cv2.boundingRect(i)
+            cv2.fillPoly(blank_image, pts =[i], color=(255,255,255))
+
+            crop = thresh[y-1:y+h+1, x-1:x+w+1]
+
+            image_pil = Image.fromarray(crop).convert("LA")
+            image_pil = image_pil.resize((8, 8), Image.ANTIALIAS)
+            image_pil.save("treatment.png")
+
+            prediction = main(len(contour))
+            numbers_position.append([x, y])
+            image_prediction.append(prediction)
+
+            try:
+                cv2.imshow("crop", crop)
+                cv2.waitKey(0)
+            except:
+                pass
+
+
+def out_capchat(numbers_position, image_prediction):
+    pass
+
+
+def open_img(image):
+
+    numbers_position = []
+    image_prediction = []
+
+
+    img = cv2.imread(image)
+    #Create blanck picture
+    blank_image = create_blanck_image(img)
+    #Save thresh who's cleanned < cnts noise
+    clean_picture_little_noise(img)
+    #We fusion contours who's separate by lines
+    fusion_contours()
+    #We want to find all numbers
+    find_contour_to_numbers(blank_image,
+                            numbers_position,
+                            image_prediction)
 
 
 
 
-        
-        img = cv2.imread("treatment.png", 0);img = cv2.resize(img, (1400, 1000))
+def croping_y_picture(picture):
+    img = cv2.imread(picture)
+    
+    y1 = int(img.shape[0] /6.5)
+    crop = img[y1:img.shape[0]-100, 100:img.shape[1]]
 
-        _, thresh = cv2.threshold(img, 100, 255, 0)#100
-
-        contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
-                                        cv2.CHAIN_APPROX_SIMPLE)
-
-        print(len(contours))
-        if len(contours) > 60:
-            for i in contours:
-                if cv2.contourArea(i) < 300:
-                    cv2.drawContours(img, [i], 0, (255,255,255), 3)
-                
-            cv2.imwrite("treatment.png", img)
-            cv2.imshow("dzadzadaz1564984", img)
-            cv2.waitKey(0)
-
-
-
-        img = cv2.imread("treatment.png", 0)
-        _, thresh = cv2.threshold(img, 150, 255, 0)#40
-        contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
-                                       cv2.CHAIN_APPROX_SIMPLE)
-
-
-        cv2.imshow("thresh123123", thresh)
-        cv2.waitKey(0)
-
-        numbers_position = []
-
-        print(len(contours))
-
-        for i in contours:
-            if cv2.contourArea(i):
- 
-                x,y,w,h = cv2.boundingRect(i)
-                cv2.fillPoly(blank_image, pts =[i], color=(255,255,255))
-
-                crop = thresh[y-1:y+h+1, x-1:x+w+1]
-                #make_line(crop)
-
-                numbers_position.append([x, y])
-                resolv_cap.resizer_picture(crop)
-
-                if len(contours) > 250:
-                    pass
-
-
-
-                try:
-                    cv2.imshow("crop", crop)
-                    cv2.waitKey(0)
-                except:
-                    pass
-
-        return img
 
 
 if __name__ == "__main__":
 
+
     path = "picture/{}"
-    image_package = ["c.png", "a.png", "c.png", "d.png"]
+    image_package = ["a.png", "c.png", "d.png"]
 
-
-    resolv_cap = Picture()
- 
     for i in image_package:
-
-        img = resolv_cap.open_img(path.format(i))
-
-
-    #BBBBBBB NEST PAS COMME LES AUTRES
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+        croping_y_picture(path.format(i))
+        img = open_img(path.format(i))
