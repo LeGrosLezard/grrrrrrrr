@@ -17,12 +17,15 @@ def make_line(thresh):
     """We make line for detect more than one area
     with border, on eyelashes is paste to the border"""
 
-    cv2.line(thresh, (0, 0), (0, thresh.shape[0]), (0), 5)
-    cv2.line(thresh, (0, 0), (thresh.shape[1], 0), (0), 5)
-    cv2.line(thresh, (thresh.shape[1], 0), (thresh.shape[1], thresh.shape[0]), (0), 5)
-    cv2.line(thresh, (0,  thresh.shape[0]), (thresh.shape[1], thresh.shape[0]), (0), 5)
+    cv2.line(thresh, (0, 0), (0, thresh.shape[0]), (0), 2)
+    cv2.line(thresh, (0, 0), (thresh.shape[1], 0), (0), 2)
 
+    cv2.line(thresh,
+             (thresh.shape[1], 0),
+             (thresh.shape[1], thresh.shape[0]), (0), 2)
 
+    cv2.line(thresh, (0,  thresh.shape[0]),
+             (thresh.shape[1], thresh.shape[0]), (0), 2)
 
 
 
@@ -30,7 +33,7 @@ class Picture:
 
     @staticmethod
     def resizer_picture(crop):
-        image_pil = Image.fromarray(crop).convert("LA").resize((28, 28), Image.ANTIALIAS).save("treatment.png")
+        image_pil = Image.fromarray(crop).convert("LA").resize((8, 8), Image.ANTIALIAS).save("treatment.png")
         
 
     @staticmethod
@@ -43,7 +46,7 @@ class Picture:
         blank_image[0:img.shape[0], 0:img.shape[1]] = 0, 0, 0
         
         gray=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        _, thresh = cv2.threshold(gray, 80, 255, 1)
+        _, thresh = cv2.threshold(gray, 30, 255, 1)
 
         contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
                                        cv2.CHAIN_APPROX_SIMPLE)
@@ -56,26 +59,19 @@ class Picture:
                 x,y,w,h = cv2.boundingRect(i)
                 cv2.fillPoly(blank_image, pts =[i], color=(255,255,255))
 
-                crop = thresh[y-5:y+h+5, x-5:x+w+5]
-                make_line(crop)
+                crop = thresh[y:y+h, x:x+w]
+                #make_line(crop)
 
                 numbers_position.append([x, y])
                 resolv_cap.resizer_picture(crop)
 
-
-
-
-                cv2.imshow("crop", crop)
-                cv2.waitKey(0)
-
+                try:
+                    cv2.imshow("crop", crop)
+                    cv2.waitKey(0)
+                except:
+                    pass
 
         return img
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
