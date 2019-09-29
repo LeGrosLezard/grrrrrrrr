@@ -1,15 +1,8 @@
 # grrr
 
-# oublie pas de cpder comme ca mtn => count+=1 if... else...  et avec les ;
+ne pas oublier le count += 1 if... else, et les points virgules, list compréhension
+
+essayer avec les 20 images et ajusté ou recommencer...
 
 
-
-
-position : récupérer x et y
-
-mettre les points dans leur bonne position
-
-les mettres en str puis int
-
-rallier entrained
 
