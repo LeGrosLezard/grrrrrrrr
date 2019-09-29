@@ -1,6 +1,6 @@
 # grrr
 
-ouais ben jy arriverai surment pas mais bon faut bien essayer
+ouais ben jy arriverai surment pas mais bon faut bien essayer au pire nique sérieux matte ce truk c impossible reconstruire, juste pour récupérer sans les lignes et encore elles passent pas toute, reconstruire l'image...
 
 1 - on fait un mask via un thresh et le nombre de couleur
 
