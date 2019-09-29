@@ -16,6 +16,7 @@ def create_blanck_image(img):
 
     return blank_image
 
+
 def clean_picture_little_noise(img):
 
     gray=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -55,6 +56,8 @@ def fusion_contours():
         cv2.destroyAllWindows()
 
 
+
+
 def find_contour_to_numbers(blank_image, numbers_position, image_prediction):
 
 
@@ -79,7 +82,7 @@ def find_contour_to_numbers(blank_image, numbers_position, image_prediction):
             image_pil = image_pil.resize((8, 8), Image.ANTIALIAS)
             image_pil.save("treatment.png")
 
-            prediction = main(len(contour))
+            prediction = main(len(contours))
             numbers_position.append([x, y])
             image_prediction.append(prediction)
 
@@ -90,10 +93,108 @@ def find_contour_to_numbers(blank_image, numbers_position, image_prediction):
                 pass
 
 
+
+
+#-----------------------------------------------------out_capchat()
+def initialise_dictionnary_pos_pred(numbers_position,
+                                    image_prediction):
+    dico = {}
+    c = 0
+    for i in numbers_position:
+        dico[str(i)] = image_prediction[c]
+        c+=1
+    return dico
+
+def all_position_by_x(numbers_position):
+
+    liste = []
+    list_work = []
+    actual = 0
+    for i in numbers_position:
+        if i[1] != actual:
+            liste.append(list_work)
+            list_work = []
+
+        list_work.append(i)
+        actual = i[1]
+
+    liste.append(list_work)
+
+    return liste
+
+
+def only_two_pos(liste):
+    liste1 = []
+    diff = 0
+    for i in liste:
+
+        if len(i) == 2:
+            liste_w = []
+            for j in i:
+                liste_w.append(j)
+            liste1.append(liste_w)
+
+        elif len(i) >= 3:
+            liste_w = []
+            for j in i:
+                if abs(diff) > 20:
+                    i.remove(j)
+
+                diff = j[0]
+                liste_w.append(j)
+            liste1.append(liste_w)
+
+    return liste1
+
+
+
+def put_position_y(liste1):
+    liste2 = []
+
+    if liste1[0][1] > liste1[1][1]:
+        liste2.append(liste1[1])
+        liste2.append(liste1[0])
+
+    else:
+        liste2 = liste1
+
+    return liste2
+
+
+
+def final_position_points(liste2, dico):
+    pos1 = min(liste2[0])
+    pos2 = max(liste2[0])
+    pos3 = min(liste2[1])
+    pos4 = max(liste2[1])
+
+
+    liste_pos = [pos1, pos2, pos3, pos4]
+    points = []
+    for i in liste_pos:
+        for key, value in dico.items():
+            if str(i) == str(key):
+                print(value)
+                points.append(value)
+
+    return points
+
+
 def out_capchat(numbers_position, image_prediction):
-    pass
+
+    dico = initialise_dictionnary_pos_pred(numbers_position,
+                                            image_prediction)
 
 
+    position_x = all_position_by_x(numbers_position)
+    final_position = only_two_pos(position_x)
+    final_position = put_position_y(final_position)
+    final_position = final_position_points(final_position, dico)
+
+#-----------------------------------------------------out_capchat()
+
+
+    
 def open_img(image):
 
     numbers_position = []
@@ -112,7 +213,8 @@ def open_img(image):
                             numbers_position,
                             image_prediction)
 
-
+    out_capchat(numbers_position, image_prediction)
+    
 
 
 def croping_y_picture(picture):
@@ -124,7 +226,6 @@ def croping_y_picture(picture):
 
 
 if __name__ == "__main__":
-
 
     path = "picture/{}"
     image_package = ["a.png", "c.png", "d.png"]
