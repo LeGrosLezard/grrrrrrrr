@@ -1,180 +1,75 @@
+import os
 import cv2
-import operator
 import numpy as np
-from PIL import Image
-from matplotlib.pyplot import *
-from collections import defaultdict
-import math
-import cv2
-from sklearn import datasets
-from sklearn import svm
 import matplotlib.pyplot as plt
-import cv2
-import numpy as np
-
-
-def data():
-    digits = datasets.load_digits()
-    clf = svm.SVC(gamma=0.0001, C=100)
-
-    x,y = digits.data[:-1], digits.target[:-1]
-    clf.fit(x,y)
-
-    return clf
-
-
-def treatment_picture_threshold():
-
-
-    img = cv2.imread("yoyo.png", 0);img = cv2.resize(img, (32, 64))
-
-
-    _, thresh = cv2.threshold(img, 50, 255, 0)
-
-    cv2.imwrite("test.png", thresh)
-    cv2.imshow("crop", thresh)
-    cv2.waitKey(0)
 
 
 
+from main_function import main_color
+
+def adjust_gamma(image, gamma):
+    """We add light to the video, we play with gamma"""
+
+    invGamma = 1.0 / gamma
+    table = np.array([((i / 255.0) ** invGamma) * 255
+            for i in np.arange(0, 256)]).astype("uint8")
+
+    return cv2.LUT(image, table)
 
 
 
+liste = os.listdir(r"C:\Users\jeanbaptiste\Desktop\resolveur de captchat\picture")
+path = "picture\{}"
 
-treatment_picture_threshold()
+c = 0
+for i in liste:
 
+    img = cv2.imread(path.format(i))
+    img = adjust_gamma(img, 0.5)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
+    blank_image = np.zeros((img.shape[0],img.shape[1],3), np.uint8)
+    blank_image[0:img.shape[0], 0:img.shape[1]] = 0, 0, 0
 
-
-
-
-
-def treatment_picture_to_dataset_form():
-
-    img1 = cv2.imread("test.png", 0);img1 = cv2.resize(img1, (8, 8))
-    img = img1.astype("float64")
-    #print(type(img))
-    #print(img)
-
-    img16 = []
-    liste_w = []
-    for i in img:
-        for j in i:
-            j = int(j/16); j = float(j)
-            img16.append(j)
-
-    img16 = np.array(img16, dtype=np.float32)
-    img16 = img16.reshape(1, -1)
-    #print(img16)
-
-    return img16, img1
-
-def main():
-    clf = data()
-    treatment_picture_threshold()
-    img16, img1 = treatment_picture_to_dataset_form()
-
-    print('Prediction:',clf.predict(img16))
+    background_picture, colors = main_color(img)
 
 
-    return clf.predict(img16)[0]
 
+    thresh_inv = False
 
-##path = "picture/{}"
-##image_package = ["d.png", "c.png", "a.png"]
-##
-##
-##for i in image_package:
-##    img = cv2.imread(path.format(i))
-##
-##
-##    blank_image = np.zeros((img.shape[0],img.shape[1],3), np.uint8)
-##    blank_image[0:img.shape[0], 0:img.shape[1]] = 0, 0, 0
-##
-##    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-##    _, thresh = cv2.threshold(gray, 100, 255, 1)
-##    
-##    cv2.imshow("dzadzadaz1564984", thresh)
-##    cv2.waitKey(0)
-##
-##
-##    contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
-##                                    cv2.CHAIN_APPROX_SIMPLE)
-##    for i in contours:
-##        if cv2.contourArea(i) <= 0:
-##            cv2.drawContours(thresh, [i], -1, (0,0,0), 2)
-##
-##    cv2.imshow("dzadzadaz1564984", thresh)
-##    cv2.waitKey(0)
-##    cv2.imwrite("yoyo.png", thresh)
-##
-##
-##
-##
-##    img = cv2.imread("yoyo.png", 0)
-##    img = cv2.resize(img, (1800, 1000), 0)
-##
-##    _, thresh = cv2.threshold(img, 100, 255, 0)
-##
-##    contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
-##                                    cv2.CHAIN_APPROX_SIMPLE)
-##    
-##    print(len(contours))
-##    if len(contours) > 10:#avec + de contour on a plus de chance de fragment du chiiffre
-##        for i in contours:
-##            
-##            if 2000 > cv2.contourArea(i) > 11:
-##                cv2.drawContours(thresh, [i], -1, (255,255,255), 3)
-##
-##        
-##    cv2.imshow("dzadzadaz1564984", thresh)
-##    cv2.waitKey(0)
-##    cv2.imwrite("yoyo.png", thresh)
-##
-##
-##
-##    
-##    img = cv2.imread("yoyo.png", 0)
-##    _, thresh = cv2.threshold(img, 100, 255, 0)
-##
-##    contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
-##                                       cv2.CHAIN_APPROX_SIMPLE)
-##
-##    print(len(contours))
-##    for i in contours:
-##
-##        x,y,w,h = cv2.boundingRect(i)
-##        crop = thresh[y-1:y+h+1, x-1:x+w+1]
-##        main()
-##        cv2.imshow("treatment.png", crop)
-##        cv2.imwrite("yoyo.png", crop)
-##        cv2.waitKey(0)
-##
-##    cv2.imshow("dzadzadaz1564984", thresh)
-##    cv2.waitKey(0)
+    if background_picture == (0, 0, 0):
+        thresh_inv = True
+
+    if thresh_inv is True:
+        inv_blanck = blank_image
+
+        #
+        _, thresh = cv2.threshold(gray, 30, 255, 0)
+
+        for x in range(thresh.shape[0]):
+            for y in range(thresh.shape[1]):
+                if thresh[x, y] == 0:
+                   for i in colors:
+                    if img[x, y][0] == i[0][0] and\
+                       img[x, y][1] == i[0][1] and\
+                       img[x, y][2] == i[0][2]:
+                        blank_image[x, y] = gray[x, y]
 
 
 
 
+        cv2.imshow("image.png", img)
+        cv2.imshow("thresh.png", thresh)
+        cv2.imshow("blank_image.png", blank_image)
+        cv2.waitKey(0)
+
+    else:
+        _, thresh = cv2.threshold(gray, 130, 255, 0)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        cv2.imshow("image.png", img)
+        cv2.imshow("thresh.png", thresh)
+        cv2.waitKey(0)
 
 
 
