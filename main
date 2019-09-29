@@ -8,6 +8,8 @@ import math
 
 from entrained import main
 
+
+
 def create_blanck_image(img):
     """Black picture of img size"""
 
@@ -105,6 +107,8 @@ def initialise_dictionnary_pos_pred(numbers_position,
         c+=1
     return dico
 
+
+
 def all_position_by_x(numbers_position):
 
     liste = []
@@ -177,14 +181,16 @@ def final_position_points(liste2, dico):
                 print(value)
                 points.append(value)
 
-    return points
+    return int(str(points[0]) + str(points[1])),\
+           int(str(points[2]) + str(points[3]))
+
+
 
 
 def out_capchat(numbers_position, image_prediction):
 
     dico = initialise_dictionnary_pos_pred(numbers_position,
                                             image_prediction)
-
 
     position_x = all_position_by_x(numbers_position)
     final_position = only_two_pos(position_x)
@@ -194,7 +200,6 @@ def out_capchat(numbers_position, image_prediction):
 #-----------------------------------------------------out_capchat()
 
 
-    
 def open_img(image):
 
     numbers_position = []
