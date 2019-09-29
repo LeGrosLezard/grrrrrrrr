@@ -19,6 +19,7 @@ def adjust_gamma(image, gamma):
 
 
 liste = os.listdir(r"C:\Users\jeanbaptiste\Desktop\resolveur de captchat\picture")
+#liste = os.listdir(r"C:\Users\jeanbaptiste\Desktop\resolveur de captchat\original")
 path = "picture\{}"
 
 c = 0
@@ -32,7 +33,6 @@ for i in liste:
     blank_image[0:img.shape[0], 0:img.shape[1]] = 0, 0, 0
 
     background_picture, colors = main_color(img)
-
 
 
     thresh_inv = False
@@ -56,16 +56,13 @@ for i in liste:
                         blank_image[x, y] = gray[x, y]
 
 
-
-
         cv2.imshow("image.png", img)
         cv2.imshow("thresh.png", thresh)
         cv2.imshow("blank_image.png", blank_image)
         cv2.waitKey(0)
 
     else:
-        _, thresh = cv2.threshold(gray, 130, 255, 0)
-
+        _, thresh = cv2.threshold(gray, 60, 255, 0)
 
         cv2.imshow("image.png", img)
         cv2.imshow("thresh.png", thresh)
