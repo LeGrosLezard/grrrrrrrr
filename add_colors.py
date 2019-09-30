@@ -23,21 +23,43 @@ contours, _ = cv2.findContours(thresh, cv2.RETR_TREE,
                                cv2.CHAIN_APPROX_SIMPLE)
 
 
-liste = []
+liste_x = []
+liste_y = []
+
 for x in range(thresh.shape[0]):
     for y in range(thresh.shape[1]):
-        
+
         blank_image[x, y] = thresh[x, y]
         
         if thresh[x, y] == 255:
-            print(x, y)
+            
+            blank_image[x + 1, y] = 0, 0, 255
+            blank_image[x + 2, y] = 0, 0, 255
+            blank_image[x - 1, y] = 0, 0, 255
+            blank_image[x - 2, y] = 0, 0, 255
+
+            blank_image[x, y - 1] = 0, 0, 255
+            blank_image[x, y - 2] = 0, 0, 255
+            blank_image[x, y + 1] = 0, 0, 255
+            blank_image[x, y + 2] = 0, 0, 255
+
+            blank_image[x - 1, y - 1] = 0, 0, 255
+            blank_image[x + 1, y + 1] = 0, 0, 255
+            blank_image[x - 1, y + 1] = 0, 0, 255
+            blank_image[x + 1, y - 1] = 0, 0, 255
+            
+            liste_x.append(x)
+            liste_y.append(y)
+
+
+
 
             blank_image[x, y] = 0, 0, 255
 
             cv2.imshow("blank_image.png", blank_image)
             cv2.imshow("thresh.png", thresh)
             cv2.waitKey(0)
-
+    
 
 
 
