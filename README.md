@@ -10,7 +10,9 @@
 4 - crop et parcourir l'image
 
 
+5 - sinon cv2 knn
 
+mais ca va marcher pcque c les image tests mais ca me confortera 
 
 
 
