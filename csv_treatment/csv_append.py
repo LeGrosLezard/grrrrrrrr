@@ -3,7 +3,7 @@ import os
 
 
 def csv_write():
-    with open('csv/test.csv', 'w') as file:
+    with open('../csv/test.csv', 'w') as file:
         writer = csv.writer(file)
         file.write("label;")
         for i in range(0, 784):
@@ -65,7 +65,7 @@ def data_treatment(number, label):
 
     path_list = r"C:\Users\jeanbaptiste\Desktop\resolveur de captchat\picture\train\{}" 
     liste = os.listdir(path_list.format(number))
-    path = "picture/train/{}/{}"
+    path = "../picture/train/{}/{}"
 
 
     for i in liste:
@@ -106,7 +106,7 @@ def data_treatment(number, label):
 
         def write_data_into_csv(data, label):
 
-            with open('csv/test.csv', 'a') as file:
+            with open('../csv/test.csv', 'a') as file:
                 writer = csv.writer(file)
                 file.write(label+";")
                 for i in data:
