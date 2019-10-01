@@ -9,7 +9,7 @@ from sklearn.utils import shuffle
 
 
 
-file =  open('../csv/test.csv', 'r')
+file =  open('../csv/test_signe.csv', 'r')
     
 dataframe = file.readlines()
 dataframe = dataframe[1:]
@@ -27,11 +27,7 @@ for i in dataframe:
             if j == ";" or j == " ":
                 pass
             else:
-                try:
-                    j = int(j)
-                    liste_w.append(int(j))
-                except:
-                    liste_w.append(str(j))
+                liste_w.append(int(j))
 
 
 for i in X:
@@ -46,7 +42,7 @@ X_test,Y_test = X, Y
 
 model = svm.SVC(kernel="linear",C=2)
 model.fit(X_train,Y_train)
-joblib.dump(model, "../models/captchat_recognitionV2") 
+joblib.dump(model, "../models/captchat_signe") 
 predictions = model.predict(X_test)
 
 print("Score", metrics.accuracy_score(Y_test, predictions))

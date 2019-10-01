@@ -3,7 +3,7 @@ import os
 
 
 def csv_write():
-    with open('../csv/test.csv', 'w') as file:
+    with open('../csv/test_signe.csv', 'w') as file:
         writer = csv.writer(file)
         file.write("label;")
         for i in range(0, 784):
@@ -61,16 +61,16 @@ def reshape_thresh(thresh):
     return thresh
 
 
-def data_treatment(number, label):
+def data_treatment(signe, label):
 
     path_list = r"C:\Users\jeanbaptiste\Desktop\resolveur de captchat\picture\train\{}" 
-    liste = os.listdir(path_list.format(number))
+    liste = os.listdir(path_list.format(signe))
     path = "../picture/train/{}/{}"
 
 
     for i in liste:
-        print(path.format(number, i))
-        img = cv2.imread(path.format(number, i))
+        print(path.format(signe, i))
+        img = cv2.imread(path.format(signe, i))
 
         background_picture, colors = main_color(img)
 
@@ -106,7 +106,7 @@ def data_treatment(number, label):
 
         def write_data_into_csv(data, label):
 
-            with open('../csv/test.csv', 'a') as file:
+            with open('../csv/test_signe.csv', 'a') as file:
                 writer = csv.writer(file)
                 file.write(label+";")
                 for i in data:
@@ -119,15 +119,12 @@ def data_treatment(number, label):
 
 csv_write()
 
-for i in range(0, 10):
-    print(i)
-    data_treatment(str(i), str(i))
 
+data_treatment("lignes", "0")
+data_treatment("interro", "1")
+data_treatment("signe_multiplication", "2")
+data_treatment("signes_plus", "3")
 
-data_treatment("lignes", "a")
-data_treatment("interro", "b")
-data_treatment("signe_multiplication", "c")
-data_treatment("signes_plus", "d")
 
 
 
