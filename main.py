@@ -53,11 +53,12 @@ def img_to_thresh(img):
 
     return thresh
 
+
+
 def reshape_tresh(thresh):
 
     thresh = cv2.resize(thresh, (28, 28))
     return thresh
-
 
 
 def to_list(thresh):
@@ -74,14 +75,26 @@ def to_list(thresh):
 
     return data
 
+
 def prediction(thresh):
     thresh = reshape_tresh(thresh)
     rows, cols = thresh.shape
 
     X = to_list(thresh)
 
-    predictions = model.predict([X])      
-    print("PREDICTION: ", predictions[0])
+    predictions = model.predict([X])
+
+
+    if predictions[0] == "a":
+        print("PREDICTION ligne")
+    elif predictions[0] == "b":
+        print("PREDICTION interro")
+    elif predictions[0] == "c":
+        print("PREDICTION multiplication")
+    elif predictions[0] == "d":
+        print("PREDICTION addition")
+    else:
+        print("PREDICTION ", predictions[0])
 
     return predictions[0]
 
@@ -94,7 +107,8 @@ def prediction(thresh):
 
 
 
-model = joblib.load("models/captchat_recognition")
+model = joblib.load("models/captchat_recognitionV2")
+
 
 liste = os.listdir(r"C:\Users\jeanbaptiste\Desktop\resolveur de captchat\picture")
 path = "picture/{}"
@@ -167,42 +181,15 @@ for element in liste:
                                        cv2.CHAIN_APPROX_SIMPLE)
 
 
-        liste_positionX = []
-        liste_positionY = []
-        liste_positionXW = []
-        liste_positionYH = []
-        liste_prediction = []
 
         for i in contours:
             if cv2.contourArea(i) > 1.0:
-
+    
+                x, y, w, h = cv2.boundingRect(i)
 
                 detection = thresh[y-6:y+h+6, x-6:x+w+4]
                 detection1 = img[y-6:y+h+6, x-6:x+w+4]
-
-                liste_positionX.append(x)
-                liste_positionY.append(y)
-                liste_positionXW.append(x+w)
-                liste_positionYH.append(y+h)
-
                 try:
                     predicting = prediction(detection)
-                    liste_prediction.append(predicting)
                 except:
                     pass
-
-        print(liste_positionX, "\n",
-              liste_positionY, "\n",
-              liste_positionXW, "\n",
-              liste_positionYH, "\n",
-              liste_prediction)
-
-            
-
-
-
-
-
-
-
-
