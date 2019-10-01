@@ -119,7 +119,7 @@ def data_treatment(number, label):
 
 csv_write()
 
-for i in range(0, 9):
+for i in range(0, 10):
     print(i)
     data_treatment(str(i), str(i))
 
