@@ -47,7 +47,7 @@ def main_color(image):
 
 
 
-model = joblib.load("models/coucou")
+model = joblib.load("models/captchat_recognition")
 
 
 for i in range(0, 9):
