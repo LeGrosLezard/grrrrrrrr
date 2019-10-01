@@ -1,14 +1,12 @@
 # grrr
 
-- > comprendre sur tf y'avais dataset, traitement dataset, pre acti, acti, sortie, puis la loss 10x et tout la y'a pas ca
+1 - truk pour les images mtn
 
-- > pcque javais compris les trucks mais ya pas la (sté avec les maladies la c avec les images)
+#------------------- plus tard
 
-1 - tester
+2 - 9 marche pas -> plus d'image ou nettoyer les 8 et 9 ou ajouter chai pas
 
-2 - si ca marche pas rééssayer
-
-3 - sinon cv2 knn
+3 - test cv2 knn
 
 
 
