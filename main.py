@@ -1,4 +1,4 @@
-import joblib,cv2
+import joblib, cv2
 import numpy as np
 import os
 
@@ -169,17 +169,21 @@ for element in liste:
 
         liste_positionX = []
         liste_positionY = []
+        liste_positionXW = []
+        liste_positionYH = []
         liste_prediction = []
 
         for i in contours:
             if cv2.contourArea(i) > 1.0:
-                x,y,w,h = cv2.boundingRect(i)
- 
+
+
                 detection = thresh[y-6:y+h+6, x-6:x+w+4]
                 detection1 = img[y-6:y+h+6, x-6:x+w+4]
 
                 liste_positionX.append(x)
                 liste_positionY.append(y)
+                liste_positionXW.append(x+w)
+                liste_positionYH.append(y+h)
 
                 try:
                     predicting = prediction(detection)
@@ -189,6 +193,8 @@ for element in liste:
 
         print(liste_positionX, "\n",
               liste_positionY, "\n",
+              liste_positionXW, "\n",
+              liste_positionYH, "\n",
               liste_prediction)
 
             
