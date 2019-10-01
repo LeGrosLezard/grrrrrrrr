@@ -9,7 +9,7 @@ from sklearn.utils import shuffle
 
 
 
-file =  open('csv/test.csv', 'r')
+file =  open('../csv/test.csv', 'r')
     
 dataframe = file.readlines()
 dataframe = dataframe[1:]
@@ -43,7 +43,7 @@ X_test,Y_test = X, Y
 
 model = svm.SVC(kernel="linear",C=2)
 model.fit(X_train,Y_train)
-joblib.dump(model, "models/captchat_recognition") 
+joblib.dump(model, "../models/captchat_recognition") 
 predictions = model.predict(X_test)
 
 print("Score", metrics.accuracy_score(Y_test, predictions))
