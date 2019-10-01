@@ -83,6 +83,8 @@ def prediction(thresh):
     predictions = model.predict([X])      
     print("PREDICTION: ", predictions[0])
 
+    return predictions[0]
+
     cv2.imshow("image", thresh)
     cv2.waitKey(0)
 
@@ -95,9 +97,9 @@ def prediction(thresh):
 model = joblib.load("models/captchat_recognition")
 
 liste = os.listdir(r"C:\Users\jeanbaptiste\Desktop\resolveur de captchat\picture")
-print(liste)
 path = "picture/{}"
 
+c = 0
 for element in liste:
     if element == "train":
         pass
@@ -164,19 +166,32 @@ for element in liste:
         contours, _ = cv2.findContours(thresh_blanck, cv2.RETR_TREE,
                                        cv2.CHAIN_APPROX_SIMPLE)
 
+
+        liste_positionX = []
+        liste_positionY = []
+        liste_prediction = []
+
         for i in contours:
-            if cv2.contourArea(i) > 0.0:
-            
+            if cv2.contourArea(i) > 1.0:
                 x,y,w,h = cv2.boundingRect(i)
-                detection = thresh[y-5:y+h+5, x-5:x+w+5]
+ 
+                detection = thresh[y-6:y+h+6, x-6:x+w+4]
+                detection1 = img[y-6:y+h+6, x-6:x+w+4]
+
+                liste_positionX.append(x)
+                liste_positionY.append(y)
+
                 try:
-                    cv2.imshow("detection", detection)
-                    cv2.waitKey(0)
+                    predicting = prediction(detection)
+                    liste_prediction.append(predicting)
                 except:
                     pass
 
+        print(liste_positionX, "\n",
+              liste_positionY, "\n",
+              liste_prediction)
 
-
+            
 
 
 
