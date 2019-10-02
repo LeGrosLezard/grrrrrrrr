@@ -1,5 +1,7 @@
 # grrr
 
+sur sa vidéo jlui ai mis que j'avais le num de ses parents mais jlai pas du coup jlai enlevé mais pffffffff
+
 si une marche pas c'est pas grave !
 
 - faire la position/ la prochaine fois faire attention aux images coupé/ + donne interrogation et pourtant les pluss sont nickels
