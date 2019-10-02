@@ -3,12 +3,14 @@
 
 - faire la position
 
-- si ca dit addiition ou multiplication voir la position, si addition ou multiplication par en face des nombres
+- si ca dit addiition ou multiplication voir la position, si addition ou multiplication par en face des nombres de la zone du dessous
   -> non
   
  - si ni addition ni multi alors soustraction
   
 - si le nombre se repete et qu'il se chevauche alors le meme nombre
+  -> et récupérer le rectangle le plus gros
+
 
 
 
