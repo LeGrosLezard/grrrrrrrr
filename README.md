@@ -1,5 +1,6 @@
 # grrr
 
+si une marche pas c'est pas grave !
 
 - faire la position
 
@@ -11,6 +12,7 @@
 - si le nombre se repete et qu'il se chevauche alors le meme nombre
   -> et récupérer le rectangle le plus gros
 
+- si les images tests passent, les mettres dans le csv
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
