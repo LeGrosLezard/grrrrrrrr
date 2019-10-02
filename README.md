@@ -25,4 +25,4 @@ essayer la technique de la recherche d'image automatique sans crop
 
 truk de l'assiette (classfier + apprentissage solo + scrappage des assiette image -> est-ce que ca pourrait etre une fourchette test ect)
 
-
+(-> le monde de l'ordi c internet)
