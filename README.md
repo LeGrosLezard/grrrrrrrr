@@ -1,6 +1,6 @@
 # grrr
 
-sur sa vidéo jlui ai mis que j'avais le num de ses parents mais jlai pas du coup jlai enlevé mais pffffffff
+sur sa vidéo jlui ai mis que j'avais le num de ses parents mais jlai pas du coup jlai enlevé et en plus ca aurait pu justement lui permette de comprendre que sté du bluff mais pffffffff
 
 si une marche pas c'est pas grave !
 
