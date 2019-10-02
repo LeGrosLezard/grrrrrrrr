@@ -1,19 +1,16 @@
 # grrr
 
 
-- trier les 300 autres images
+- faire la position
 
-- faire que ca marche
+- si ca dit addiition ou multiplication voir la position, si addition ou multiplication par en face des nombres
+  -> non
+  
+ - si ni addition ni multi alors soustraction
+  
+- si le nombre se repete et qu'il se chevauche alors le meme nombre
 
-- vu qu'il me les a donné remplir l'input
 
-- faire les test sur les 100 images tests,
-
-- faire position des nombres mtn
-
-- faire l'oération, si pas + ou * alors -
-
-- mais bon tant quil me donne pas d'autres image bah jpe pas test et meme j'en ai que 23
 
 #----------- plus tard
 
