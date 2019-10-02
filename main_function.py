@@ -16,25 +16,27 @@ import numpy as np
 ##e = ['a', 'a', 'a', 'b', 'b', 'a', 'a', 'a', 'a', 'a', '3', 'd', 'a', 'a', '3', '8', '3', '8', '3', '9', '3', '9', 'a', 'a', 'a']
 
 
-##a = [145, 140, 135, 120, 115, 105, 100, 95, 85, 80, 75, 65, 60, 40, 35, 20, 15, 11, 77, 11, 74, 8, 74, 62, 50, 37, 25, 13, 21, 22, 29, 12, 74, 74, 75, 62, 37, 38, 45, 53, 53, 75, 75, 75, 62, 62, 68, 69, 84, 85] 
-##b = [135, 135, 135, 134, 134, 133, 133, 133, 132, 132, 132, 131, 131, 130, 130, 129, 129, 123, 122, 119, 117, 102, 100, 99, 99, 99, 99, 99, 85, 92, 85, 72, 71, 78, 72, 71, 68, 75, 68, 53, 59, 48, 55, 49, 47, 55, 37, 42, 25, 25] 
-##c = [149, 144, 139, 124, 118, 109, 104, 99, 89, 84, 79, 69, 64, 49, 39, 29, 19, 21, 81, 21, 81, 17, 81, 69, 57, 44, 32, 16, 33, 25, 32, 21, 82, 82, 82, 70, 49, 41, 48, 62, 56, 82, 82, 82, 70, 70, 78, 72, 88, 88] 
-##d = [137, 137, 137, 136, 136, 135, 135, 135, 134, 134, 134, 133, 133, 132, 132, 131, 131, 125, 125, 122, 120, 109, 102, 101, 101, 101, 101, 101, 95, 95, 88, 83, 84, 83, 78, 84, 78, 78, 71, 62, 62, 61, 60, 55, 61, 60, 45, 45, 28, 28] 
-##e = ['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'b', 'a', '2', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'd', '8', '8', '8', '5', 'a', 'a', 'a', '8', 'a', '8', '8', '8', '8', '8', 'a', 'a', 'a', 'a']
 
 
-a = [139, 73, 19, 10, 85, 64, 54, 30, 41, 19, 89, 52, 32, 100, 96, 111, 129, 144, 140, 80, 68, 68, 68, 68, 79, 67] 
-b = [118, 113, 112, 108, 106, 100, 99, 90, 87, 87, 86, 86, 86, 85, 85, 84, 83, 82, 82, 57, 57, 63, 58, 38, 34, 34] 
-c = [142, 79, 29, 16, 89, 68, 58, 33, 51, 29, 92, 63, 40, 106, 99, 117, 136, 150, 143, 87, 76, 76, 75, 75, 87, 74] 
-d = [120, 115, 114, 111, 111, 102, 101, 92, 91, 92, 88, 92, 91, 87, 87, 86, 85, 84, 84, 65, 70, 69, 63, 47, 47, 36] 
-e = ['a', 'a', 'a', 'a', '2', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', '7', '8', '8', '8', '5', '2', '5']
- 
+##a = [139, 73, 19, 10, 85, 64, 54, 30, 41, 19, 89, 52, 32, 100, 96, 111, 129, 144, 140, 80, 68, 68, 68, 68, 79, 67] 
+##b = [118, 113, 112, 108, 106, 100, 99, 90, 87, 87, 86, 86, 86, 85, 85, 84, 83, 82, 82, 57, 57, 63, 58, 38, 34, 34] 
+##c = [142, 79, 29, 16, 89, 68, 58, 33, 51, 29, 92, 63, 40, 106, 99, 117, 136, 150, 143, 87, 76, 76, 75, 75, 87, 74] 
+##d = [120, 115, 114, 111, 111, 102, 101, 92, 91, 92, 88, 92, 91, 87, 87, 86, 85, 84, 84, 65, 70, 69, 63, 47, 47, 36] 
+##e = ['a', 'a', 'a', 'a', '2', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', '7', '8', '8', '8', '5', '2', '5']
+## 
 
-blank_image = np.zeros((200,200,3), np.uint8)
-blank_image[0:200, 0:200] = 255, 255, 255
 
-blank_image2 = np.zeros((200,200,3), np.uint8)
-blank_image2[0:200, 0:200] = 255, 255, 255
+a = [26, 19, 82, 44, 19, 69, 56, 81, 126, 54, 38, 24, 21, 77, 80, 68, 79, 67] 
+b = [112, 112, 103, 87, 87, 86, 86, 85, 73, 71, 71, 70, 65, 61, 63, 57, 34, 34] 
+c = [29, 24, 89, 51, 27, 76, 64, 86, 144, 61, 47, 29, 26, 94, 88, 75, 87, 75] 
+d = [114, 114, 111, 89, 89, 88, 88, 87, 75, 73, 73, 72, 67, 74, 69, 66, 44, 47] 
+e = ['a', 'a', 'b', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', '8', '8', '2', '4', '3']
+
+
+
+
+
+
 
 a = a[:len(e)]
 b = b[:len(e)]
@@ -67,18 +69,23 @@ for i in range(len(e)):
         except:
             pass
 
+for c, i in enumerate(position):
+    print(i, c)
+    print("")
 
+print("")
 
 
 count = 0
 mean = 0
 for i in position:
-    if i  == []:
-        pass
-    else:
+    if i  != []:
         for j in i:
             mean += j[0]
-    count += 1
+            count += 1
+
+
+
 
 mean = int(mean / count)
 for i in position:
@@ -86,6 +93,7 @@ for i in position:
         pass
     else:
         for j in i:
+            print(j[0], mean)
             if j[0] > mean + 25 or\
                j[0] < mean - 25:
                 i.remove(j)
@@ -106,10 +114,6 @@ for i in position:
 
 
 
-
-
-
-
 stop = False
 for s in sign:
     for i in position:
@@ -123,11 +127,6 @@ for s in sign:
 if stop is False:
     position[-1].append("soustraction")
 
-
-
-
-top = []
-bot = []
 
 
 x = []
@@ -149,18 +148,100 @@ for i in position:
 
 
 
+top = []
+bot = []
+
+if len(x) == 4:
+    for i in range(2):
+        bot.append(max(x))
+        x.remove(max(x))
+    for i in x:
+        top.append(i)
+
+maxi = 0
+count = 0
+if len(x) == 3:
+    for i in x:
+        if count == 0:
+            maxi = i
+        else:
+            if i >= maxi:
+                maxi = i
+   
+        count += 1
+
+    for i in x:
+        if i < maxi - 15:
+            top.append(i)
+        else:
+            bot.append(i)
 
 
-#faux car 1*15 ou 15 * 1
-print("")
-print(x)
-for i in range(2):
-    top.append(max(x))
-    x.remove(max(x))
+
 print(top)
+print(bot)
+
+final_top = []
+final_bot = []
+count = 0
+for i in position[:-1]:
+    if i == []:
+        pass
+    else:
+        for j in i:
+            for k in top:
+                if j[0] == k:
+                    final_bot.append([j, count])
+                    break
+            for l in bot:
+                if j[0] == l:
+                    final_top.append([j, count])
+                    break
+    count += 1
+
+
+print("")
+print(final_bot) 
+print(final_top)
+
+
+left_top = ""
+right_top = ""
+
+left_bot = ""
+right_bot = ""
+
+
+if len(final_bot) == 2:
+    if final_bot[0][0][1] < final_bot[1][0][1]:
+        left_top = final_bot[0][1]
+        right_top = final_bot[1][1]
+    else:
+        left_top = final_bot[1][1]
+        right_top = final_bot[0][1]
+
+if len(final_bot) == 1:
+    right_top = final_bot[0][1]
+
+
+if len(final_top) == 2:
+    if final_top[0][0][1] < final_top[1][0][1]:
+        left_bot = final_top[0][1]
+        right_bot = final_top[1][1]
+    else:
+        left_bot = final_top[1][1]
+        right_bot = final_top[0][1]
+
+if len(final_top) == 1:
+    right_bot = final_bot[0][1]
 
 
 
+
+a = int(str(left_top)+ str(right_top))
+b = int(str(left_bot)+ str(right_bot))
+
+print(a, position[-1][0], b)
 
 
 
