@@ -2,7 +2,7 @@
 
 si une marche pas c'est pas grave !
 
-- faire la position
+- faire la position/ la prochaine fois faire attention aux images coupé/ + donne interrogation et pourtant les pluss sont nickels
 
 - si ca dit addiition ou multiplication voir la position, si addition ou multiplication par en face des nombres de la zone du dessous
   -> non
