@@ -103,8 +103,28 @@ def prediction(thresh):
 
 
 
+def create_blank(img):
+    blank_image = np.zeros((img.shape[0],img.shape[1],3), np.uint8)
+    blank_image[0:img.shape[0], 0:img.shape[1]] = 0, 0, 0
+    return blank_image
 
 
+
+def replace_background(img):
+    background_picture, colors = main_color(img)
+
+    if background_picture == (0, 0, 0):
+        img = switch_background(img)
+
+    return img, colors
+
+
+def croping_y_picture(img):
+
+    y1 = int(img.shape[0] /6.5)
+    crop = img[y1:img.shape[0]-50, 200:img.shape[1]-150]
+
+    return crop
 
 
 model = joblib.load("models/captchat_recognitionV2")
@@ -121,45 +141,25 @@ for element in liste:
 
         img = cv2.imread(path.format(element))
 
-
-        def replace_background(img):
-            background_picture, colors = main_color(img)
-
-            if background_picture == (0, 0, 0):
-                img = switch_background(img)
-
-            return img, colors
-
-        
+        #replace background
         img, colors = replace_background(img)
+
         for i in colors:
             if i == (0,0,0) or i == (255, 255, 255):
                 colors.remove(i)
 
-        def croping_y_picture(img):
-
-            y1 = int(img.shape[0] /6.5)
-            crop = img[y1:img.shape[0]-50, 200:img.shape[1]-150]
-
-            return crop
-
+        #croping picture
         img = croping_y_picture(img)
+
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         _, thresh = cv2.threshold(gray, 150, 255, 0)
 
         cv2.imshow("image", thresh)
         cv2.imshow("img", img)
         cv2.waitKey(0)
-        cv2.destroyAllWindows()
 
 
-
-        def create_blank(img):
-            blank_image = np.zeros((img.shape[0],img.shape[1],3), np.uint8)
-            blank_image[0:img.shape[0], 0:img.shape[1]] = 0, 0, 0
-            return blank_image
-
-
+        #create black picture
         blank_image = create_blank(img)
 
         for pos1 in range(img.shape[0]):
@@ -181,6 +181,9 @@ for element in liste:
                                        cv2.CHAIN_APPROX_SIMPLE)
 
 
+        liste_X = []
+        liste_Y = []
+        liste_P = []
 
         for i in contours:
             if cv2.contourArea(i) > 1.0:
@@ -189,7 +192,26 @@ for element in liste:
 
                 detection = thresh[y-6:y+h+6, x-6:x+w+4]
                 detection1 = img[y-6:y+h+6, x-6:x+w+4]
+
                 try:
                     predicting = prediction(detection)
+
+                    liste_X.append(x)
+                    liste_Y.append(y)
+                    liste_P.append(predicting)
+
                 except:
                     pass
+
+        print(liste_X, "\n",
+              liste_Y, "\n",
+              liste_P)
+        
+
+
+
+
+
+
+
+
